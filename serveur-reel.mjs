@@ -39,7 +39,7 @@ app.post("/api/analyse-document", async (req, res) => {
   });
 
   const data = await reponseIA.json();
-  const resultat = data.content?.[0]?.text ?? "{}";
+  const resultat = (data.content?.[0]?.text ?? "{}").replace(/```json|```/g, "").trim();
 
   try {
     res.json(JSON.parse(resultat));

@@ -71,7 +71,8 @@ app.post("/api/analyse-document", async (req, res) => {
 });
 
 app.post("/api/interne/analyse", async (req, res) => {
-  if (req.headers["x-cle-interne"] !== process.env.CLE_INTERNE) {
+   if (req.headers["x-cle-interne"] !== process.env.CLE_INTERNE) {
+    console.log("REFUS — reçu:[" + req.headers["x-cle-interne"] + "] attendu:[" + process.env.CLE_INTERNE + "]");
     return res.status(401).json({ erreur: "Accès refusé" });
   }
   const { texte, pdfBase64 } = req.body ?? {};
